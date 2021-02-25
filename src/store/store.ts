@@ -24,7 +24,7 @@ export const store = createStore<State>({
                         localStorage.setItem('cities', JSON.stringify(cities)); //backup
                     })
             } else {
-                console.log('PAS CALL API');
+                console.log('NO CALL API');
                 commit('SaveCities', JSON.parse(localStorage.cities));
             }
         }
