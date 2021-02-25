@@ -18,7 +18,8 @@ export const store = createStore<State>({
                     .then((citiesData) => {
                         let cities = [];
                         for (const { name, coord: {lat, lon}, weather: [{description: weather, icon: icon}], main: {temp: temperature}, dt: updatedAt } of citiesData.data.list) {
-                            cities.push({ name, lat, lon, weather, icon, temperature, updatedAt: new Date(updatedAt) });
+                            console.log(updatedAt)
+                            cities.push({ name, lat, lon, weather, icon, temperature, updatedAt: new Date(updatedAt * 1000) });
                         }
                         commit('SaveCities', cities);
                         localStorage.setItem('cities', JSON.stringify(cities)); //backup

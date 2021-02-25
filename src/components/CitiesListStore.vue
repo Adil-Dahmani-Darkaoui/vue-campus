@@ -9,9 +9,10 @@
         style="width: 100%"
     >
   </div>
-  <div v-if="search.length > 0">
+<!--  <p>{{search().length}}</p>-->
+  <div v-if="search().length > 0">
     <h1>Liste des villes</h1>
-    <City v-for="city of search " :key="city.id" :name="city.name" :weather="city.weather"
+    <City v-for="city of search() " :key="city.id" :name="city.name" :weather="city.weather"
           :temperature="city.temperature" :updated-at="city.updatedAt"></City>
   </div>
 
