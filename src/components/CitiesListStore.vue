@@ -9,18 +9,24 @@
         style="width: 100%"
     >
   </div>
-  <div>
+  <div v-if="search.length > 0">
     <h1>Liste des villes</h1>
-    <City v-for="city of cities" :key="city.id" :name="city.name" :weather="city.weather"
+    <City v-for="city of search " :key="city.id" :name="city.name" :weather="city.weather"
           :temperature="city.temperature" :updated-at="city.updatedAt"></City>
   </div>
+
+  <div v-else>
+    <h1>Liste des villes</h1>
+    <City v-for="city of cities " :key="city.id" :name="city.name" :weather="city.weather"
+          :temperature="city.temperature" :updated-at="city.updatedAt"></City>
+  </div>
+
 </template>
 
 <script lang="ts">
 import City from "./City.vue";
 import {defineComponent, computed} from 'vue';
 import {useStore} from 'vuex';
-// import {store} from "@/store/store";
 
 export default defineComponent({
   name: 'CitiesListStore',
@@ -39,12 +45,14 @@ export default defineComponent({
   }),
   methods: {
     search: function () {
-      const store = useStore();
-      store.dispatch('getCitiesAsync');
-      let arr: Array<object> = [];
-      arr.push(computed(() => parseInt(store.state.cities.temperature, 10) >= parseInt(this.input, 10)))
-      // console.log(arr)
-      return arr
+      let allCities: Array<object> = [];
+      for (let city of this.cities) {
+        if (city.temperature >= this.input) {
+          allCities.push(city)
+        }
+      }
+      console.log(allCities)
+      return allCities
     }
   }
 })
