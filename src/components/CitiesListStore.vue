@@ -1,9 +1,9 @@
 <template>
   <h1>Liste des villes</h1>
-  <br /><h3>Filtré la température : </h3>
+  <br /><h3>Filtrer la température : </h3>
   <input type="number" placeholder="Search..." v-model="input" v-on:input="search()" ref="input"><br/>
 
-  <div v-if="search().length != 0">
+  <div v-if="search().length !== 0">
     <City  v-for="city of search()" :key="city.id" :name="city.name" :weather="city.weather"
            :temperature="city.temperature" :updated-at="city.updatedAt"></City>
   </div>
